@@ -1,9 +1,7 @@
-// Smooth scrolling and section transitions
 document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll(".section");
     const navLinks = document.querySelectorAll(".navbar ul li a");
   
-    // Function to check which section is in view
     function makeActive() {
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -15,10 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // Add event listener for scroll
     window.addEventListener("scroll", makeActive);
   
-    // Smooth scroll to section
     navLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
         e.preventDefault();
@@ -27,10 +23,27 @@ document.addEventListener("DOMContentLoaded", function () {
         targetSection.scrollIntoView({ behavior: "smooth" });
       });
     });
-  
-    // Scroll to section on button click
+
     window.scrollToSection = function (sectionId) {
       const section = document.getElementById(sectionId);
       section.scrollIntoView({ behavior: "smooth" });
     };
+  });
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll(".navbar ul li a");
+  
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").substring(1);
+        scrollToSection(targetId);
+      });
+    });
   });
